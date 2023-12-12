@@ -1,7 +1,5 @@
 import groovy.json.JsonSlurper
 
-class AWSUtility {
-
     def createOrUpdateEventBridgeScheduler(Map schedulerDetails) {
         def schedulerName = schedulerDetails.name
         def scheduleExpression = schedulerDetails.scheduleExpression
@@ -30,4 +28,3 @@ class AWSUtility {
         proc.waitFor()
         return proc.in.text
     }
-}
