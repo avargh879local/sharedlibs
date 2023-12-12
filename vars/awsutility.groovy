@@ -10,11 +10,5 @@ def getAWSVersion(credentialsId) {
 // Function to get the number of ECS clusters running
 def getECSClusterCount(credentialsId) {
     def clusterCountOutput = sh(script: "aws ecs list-clusters --output json | jq '.clusterArns | length'", returnStdout: true, credentialsId: credentialsId).trim()
-    try {
-        return Integer.parseInt(clusterCountOutput)
-    } catch (NumberFormatException e) {
-        // Handle parse error
-        println("Error parsing cluster count: ${e.message}")
-        return -1  // or other error indication
-    }
+    return clusterCountOutput
 }
