@@ -6,9 +6,9 @@ def getAWSVersion(credentialsId) {
     return version
 }
 
-// Function to get the number of ECS clusters running
-def getECSClusterCount(credentialsId) {
-    def clusterCountOutput = sh(script: "aws ecs list-clusters --output json | jq '.clusterArns | length'", returnStdout: true, credentialsId: credentialsId).trim()
-        return clusterCountOutput
-    }
-}
+// // Function to get the number of ECS clusters running
+// def getECSClusterCount(credentialsId) {
+//     def clusterCountOutput = sh(script: "aws ecs list-clusters --output json | jq '.clusterArns | length'", returnStdout: true, credentialsId: credentialsId).trim()
+//         return clusterCountOutput
+//     }
+// }
