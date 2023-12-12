@@ -17,8 +17,8 @@ def listEC2Instances(String region) {
     def instances = []
     def parsedOutput = new groovy.json.JsonSlurper().parseText(output)
     parsedOutput.each { reservation ->
-        reservation.each.index() { instance ->
-            def instanceInfo = echo "${index} instance is : [id: instance[0], ip: instance[1]]"
+        reservation.each { instance ->
+            def instanceInfo = [id: instance[0], ip: instance[1]]
             instances << instanceInfo
         }
     }
