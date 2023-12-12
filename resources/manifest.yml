@@ -1,0 +1,6 @@
+scheduler:
+  name: "MyScheduler"
+  cronExpression: "cron(0/10 * * * ? *)"
+  functionName: "MyLambdaFunction"
+  otherParameters: "value"
+  # Add other necessary parameters here
