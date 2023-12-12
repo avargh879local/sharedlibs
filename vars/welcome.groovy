@@ -3,8 +3,8 @@ def welcome(name){
 }
 
 def calcuatesum(a, b){
-    return a + b
     echo "The sum is ${a + b}"
+    return a + b
 }
 
 def calcuatediff(a, b){
