@@ -10,10 +10,10 @@ def getAWSVersion(credentialsId) {
 // Function to get the number of ECS clusters running
 def getECSClusterCount(credentialsId) {
     def clusterCountOutput = sh(script: "aws ecs list-clusters", returnStdout: true, credentialsId: credentialsId).trim()
-    if(clusterCountOutput == "0" || clusterCountOutput == "null"){
-        println ("There are no active clusters")
-    }else{
-        println ("clusters are present this is the present value : ${clusterCountOutput}")
+    // if(clusterCountOutput == "0" || clusterCountOutput == "null"){
+    //     println ("There are no active clusters")
+    // }else{
+    //     println ("clusters are present this is the present value : ${clusterCountOutput}")
     return clusterCountOutput
 }
 }
