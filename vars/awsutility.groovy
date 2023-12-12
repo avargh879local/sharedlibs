@@ -7,22 +7,37 @@ def getAWSVersion() {
 }
 
 def listEC2Instances(String region) {
-    // Command to describe instances in the specified region
-    // --query filters the output to show only instance IDs and IP addresses
     def command = "aws ec2 describe-instances --region ${region} --query 'Reservations[*].Instances[*].[InstanceId, PublicIpAddress]' --output json"
-
-    // Execute the command and capture the output
     def output = sh(script: command, returnStdout: true).trim()
-    // Parse the JSON output to extract instance information
-    def instances = []
+
     def parsedOutput = new groovy.json.JsonSlurper().parseText(output)
+    def instanceDescriptions = []
+    int count = 1
+
     parsedOutput.each { reservation ->
         reservation.each { instance ->
-            def instanceInfo = [id: instance[0], ip: instance[1]]
-            instances << instanceInfo
+            if (instance[0] != null && instance[1] != null) {
+                def description = "${ordinal(count)} instance: ID - ${instance[0]}, IP - ${instance[1]}"
+                instanceDescriptions << description
+                count++
+            }
         }
     }
 
-    return instances
+    return instanceDescriptions
 }
+
+// Helper method to convert numbers to ordinal format (1st, 2nd, 3rd, etc.)
+def ordinal(int number) {
+    def suffixes = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th']
+    switch (number % 100) {
+        case 11:
+        case 12:
+        case 13:
+            return number + 'th'
+        default:
+            return number + suffixes[number % 10]
+    }
+}
+
 
