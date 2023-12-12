@@ -18,6 +18,7 @@ def countActiveEC2Instances(String region) {
     def activeInstancesCount = 0
     def parsedOutput = new groovy.json.JsonSlurper().parseText(output)
     parsedOutput.each { reservation ->
+        // Each reservation is an array of instances
         activeInstancesCount += reservation.size()
     }
 
