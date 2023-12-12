@@ -6,9 +6,23 @@ def getAWSVersion() {
     return version
 }
 
-// // Function to get the number of ECS clusters running
-// def getECSClusterCount(credentialsId) {
-//     def clusterCountOutput = sh(script: "aws ecs list-clusters --output json | jq '.clusterArns | length'", returnStdout: true, credentialsId: credentialsId).trim()
-//         return clusterCountOutput
-//     }
-// }
+def listEC2Instances(String region) {
+    // Command to describe instances in the specified region
+    // --query filters the output to show only instance IDs and IP addresses
+    def command = "aws ec2 describe-instances --region ${region} --query 'Reservations[*].Instances[*].[InstanceId, PublicIpAddress]' --output json"
+
+    // Execute the command and capture the output
+    def output = sh(script: command, returnStdout: true).trim()
+    // // Parse the JSON output to extract instance information
+    // def instances = []
+    // def parsedOutput = new groovy.json.JsonSlurper().parseText(output)
+    // parsedOutput.each { reservation ->
+    //     reservation.each { instance ->
+    //         def instanceInfo = [id: instance[0], ip: instance[1]]
+    //         instances << instanceInfo
+    //     }
+    // }
+
+    return output
+}
+
