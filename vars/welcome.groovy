@@ -3,7 +3,6 @@ def welcome(name){
 }
 
 def calcuatesum(a, b){
-    echo "The sum is ${a + b}"
     return a + b
 }
 
