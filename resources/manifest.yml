@@ -1,6 +1,5 @@
 scheduler:
-  name: "MyScheduler"
-  cronExpression: "cron(0/10 * * * ? *)"
-  functionName: "MyLambdaFunction"
-  otherParameters: "value"
-  # Add other necessary parameters here
+  name: "MyEventBridgeScheduler"
+  scheduleExpression: "rate(5 minutes)"
+  targetArn: "arn:aws:lambda:region:account-id:function:function-name"
+  # Add other parameters if needed
