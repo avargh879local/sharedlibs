@@ -1,8 +1,8 @@
 import hudson.util.Secret
 
 // Function to run 'aws --version'
-def getAWSVersion(credentialsId) {
-    def version = sh(script: "aws --version", returnStdout: true, credentialsId: credentialsId).trim()
+def getAWSVersion() {
+    def version = sh(script: "aws --version", returnStdout: true).trim()
     return version
 }
 
